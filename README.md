@@ -1,34 +1,68 @@
-# mathjax-copy-userscript
-Tampermonkey userscript that makes MathJax CHTML (&lt;mjx-*>) equations selectable and copyable as plain text (e.g., a^3 + b^3 + c^3 ≥ 3abc).
-# MathJax Copy Userscript
+# MathJax CHTML: Select & Copy
 
-This is a Tampermonkey/Greasemonkey userscript that fixes the common issue where MathJax (CHTML output) equations cannot be selected or copied with `Ctrl+A` / `Ctrl+C`.
+A Tampermonkey userscript that makes **MathJax CHTML** (`<mjx-*>` elements) selectable and copyable in web pages.
+
+By default, MathJax renders math as custom DOM nodes that:
+- Don’t highlight properly when selecting with the mouse.
+- Don’t copy correctly with `Ctrl+C` (exponents, fractions, operators get lost or flattened).
+
+This script fixes those issues by:
+- Allowing normal text selection inside `<mjx-container>`.
+- Converting the rendered math DOM back into either **plain math text** (e.g. `a^3+b^3+c^3>=3abc`) or **LaTeX source** (e.g. `a^{3}+b^{3}+c^{3}\\geq 3abc`) on copy.
+
+---
 
 ## Features
-- Makes MathJax `<mjx-*>` elements selectable and copyable.
-- Optional plain-text fallback (so superscripts like `a³` can also be copied as `a^3`).
-- Works on any site that uses MathJax with CHTML rendering.
+
+- **Toggle button** at the top-right corner of the page:
+  - `Mode: Plain` → Copies math in simple ASCII style with `^`, `_`, and `/`.
+  - `Mode: LaTeX` → Copies full LaTeX syntax.
+- Handles:
+  - Superscripts (`a^3` / `a^{3}`)
+  - Subscripts (`x_1` / `x_{1}`)
+  - Fractions (`(a+b)/(c+d)` / `\frac{a+b}{c+d}`)
+  - Roots (`\sqrt{a+b}`)
+  - Common operators (`≥`, `≤`, `×`, `÷`, `·`, etc.)
+- Normalizes italic MathJax letters back to plain ASCII (`𝑎, 𝑏, 𝑐 → a, b, c`).
+
+---
 
 ## Installation
-1. Install [Tampermonkey](https://www.tampermonkey.net/) (or another userscript manager).
-2. Click [**Install Script**](https://raw.githubusercontent.com/GenericUsername01/mathjax-copy-userscript/main/mathjax-copy.user.js)  
-   *(Tampermonkey will prompt you to add it)*
+
+1. Install [Tampermonkey](https://www.tampermonkey.net/) (or a similar userscript manager).
+2. Create a new userscript and paste in the code from [`mathjax-chtml-select-copy.user.js`](./mathjax-chtml-select-copy.user.js).
+3. Save and enable the script.
+
+---
 
 ## Usage
-- Navigate to any site using MathJax (e.g., lecture notes, textbooks, forums).
-- Select math expressions normally and copy with `Ctrl+C`.
-- Pasted result will include the math as either:
-  - **Rendered text** with superscripts/subscripts, or
-  - **Plain text fallback** (e.g. `a^3 + b^3 + c^3 ≥ 3abc`).
+
+1. Navigate to any page that renders math with MathJax (CHTML).
+2. Use the toggle button in the top-right corner to choose:
+   - **Plain** mode for human-friendly copy.
+   - **LaTeX** mode for raw TeX source.
+3. Select math with your mouse and press `Ctrl+C`.
+4. Paste anywhere — you’ll get clean text instead of broken glyphs.
+
+---
 
 ## Example
-Expression on page:
-a³ + b³ + c³ ≥ 3abc
-Copied plain text:
-a^3 + b^3 + c^3 ≥ 3abc
-## Notes
-- The plain-text export covers common MathJax constructs (`msup`, `msub`, `mi`, `mn`, `mo`).  
-- If you only want native copy (e.g., with real superscripts), comment out or remove the `document.addEventListener('copy', ...)` block in the script.
 
-## License
+Rendered expression:
+
+> Let a, b, and c be nonnegative real numbers. Then  
+> \(a^3 + b^3 + c^3 \geq 3abc\).
+
+Copy results:
+
+- **Plain mode**:
+> a^3+b^3+c^3≥3abc
+- **LaTeX mode**:
+> a^{3}+b^{3}+c^{3}\geq 3abc
+
+---
+
+##License
 MIT
+
+
