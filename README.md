@@ -30,7 +30,7 @@ This script fixes those issues by:
 ## Installation
 
 1. Install [Tampermonkey](https://www.tampermonkey.net/) (or a similar userscript manager).
-2. Create a new userscript and paste in the code from [`mathjax-chtml-select-copy.user.js`](./mathjax-chtml-select-copy.user.js).
+2. Create a new userscript and paste in the code from [`mathjax-copy.user.js`](./mathjax-copy.user.js).
 3. Save and enable the script.
 
 ---
@@ -63,6 +63,7 @@ Copy results:
 ---
 
 ##License
-MIT
+
+> MIT
 
 
