@@ -11,7 +11,7 @@ This is a Tampermonkey/Greasemonkey userscript that fixes the common issue where
 
 ## Installation
 1. Install [Tampermonkey](https://www.tampermonkey.net/) (or another userscript manager).
-2. Click [**Install Script**](https://raw.githubusercontent.com/<your-username>/mathjax-copy-userscript/main/mathjax-copy.user.js)  
+2. Click [**Install Script**](https://raw.githubusercontent.com/GenericUsername01/mathjax-copy-userscript/main/mathjax-copy.user.js)  
    *(Tampermonkey will prompt you to add it)*
 
 ## Usage
